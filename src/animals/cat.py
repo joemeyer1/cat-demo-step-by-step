@@ -1,5 +1,6 @@
 
 import random
+import time
 from typing import List
 
 from src.environments.environment import Environment
@@ -7,7 +8,10 @@ from src.utils import ask_chatgpt
 
 
 class Cat:
-    restrict_behavior_to_range: List[float, float] = [0, 1]
+    restrict_behavior_to_range: List
+
+    def __init__(self):
+        self.restrict_behavior_to_range = [0, 1]
 
     def generate_random_restricted_behavior(self, environment: Environment) -> float:
         return random.uniform(*self.restrict_behavior_to_range)
@@ -18,13 +22,15 @@ class Cat:
     def train(self, environment: Environment, n_epochs: int = 100):
         for i in range(n_epochs):
             behavior = self.generate_random_restricted_behavior(environment)
+            print(behavior)
             if environment.is_too_low(behavior=behavior):
-                self.restrict_behavior_to_range[0] += 0.1
+                self.restrict_behavior_to_range[0] += 0.01
             elif environment.is_too_high(behavior=behavior):
-                self.restrict_behavior_to_range[1] -= 0.1
+                self.restrict_behavior_to_range[1] -= 0.01
 
     def test(self, environment: Environment):
         behavior = self.behave(environment)
+        print(behavior)
         if ask_chatgpt.is_appropriate(behavior, environment):
             print("Yay, happy cats get rats :)")
         else:
