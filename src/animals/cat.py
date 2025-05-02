@@ -1,6 +1,7 @@
 
 
 from src.environments.environment import Environment
+from src.utils.ask_chatgpt
 
 
 class Cat:
@@ -16,4 +17,5 @@ class Cat:
         pass
 
     def test(self, environment: Environment):
-        pass
+        behavior = self.behave(environment)
+        if ask_chatgpt.is_appropriate(behavior, environment)
