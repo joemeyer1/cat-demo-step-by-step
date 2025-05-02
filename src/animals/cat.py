@@ -13,6 +13,7 @@ class Cat:
         self.restrict_behavior_to_range = [0, 1]
 
     def generate_random_restricted_behavior(self, environment: Environment) -> float:
+        # TODO: Make behavior depend on environment
         return random.uniform(*self.restrict_behavior_to_range)
 
     def behave(self, environment: Environment) -> float:
