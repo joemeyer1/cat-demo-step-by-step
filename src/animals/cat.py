@@ -24,13 +24,14 @@ class Cat:
             behavior = self.generate_random_restricted_behavior(environment)
             print(behavior)
             if environment.is_too_low(behavior=behavior):
-                self.restrict_behavior_to_range[0] += 0.01
+                self.restrict_behavior_to_range[0] += 0.05
             elif environment.is_too_high(behavior=behavior):
-                self.restrict_behavior_to_range[1] -= 0.01
+                self.restrict_behavior_to_range[1] -= 0.05
 
     def test(self, environment: Environment):
         behavior = self.behave(environment)
-        print(behavior)
+        print(f"test: {behavior} {environment}")
+        print(f"{self.restrict_behavior_to_range}")
         if ask_chatgpt.is_appropriate(behavior, environment):
             print("Yay, happy cats get rats :)")
         else:
