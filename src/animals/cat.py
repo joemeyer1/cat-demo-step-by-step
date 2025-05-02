@@ -1,7 +1,7 @@
 
 
 from src.environments.environment import Environment
-from src.utils.ask_chatgpt
+from src.utils.ask_chatgpt import is_appropriate
 
 
 class Cat:
@@ -18,4 +18,7 @@ class Cat:
 
     def test(self, environment: Environment):
         behavior = self.behave(environment)
-        if ask_chatgpt.is_appropriate(behavior, environment)
+        if is_appropriate(behavior, environment):
+            print("Yay, happy cats get rats :)")
+        else:
+            print("Nooo, find another home kitty :(")
