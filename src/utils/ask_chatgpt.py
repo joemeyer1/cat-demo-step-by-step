@@ -9,8 +9,8 @@ def is_appropriate(behavior: float, environment: Environment) -> bool:
 
 
 def is_behavior_too_low(behavior: float, environment: Environment) -> bool:
-    return behavior < environment.low_point
+    return environment.is_too_low(behavior)
 
 
 def is_behavior_too_high(behavior: float, environment: Environment) -> bool:
-    return behavior > environment.high_point
+    return environment.is_too_high(behavior)
