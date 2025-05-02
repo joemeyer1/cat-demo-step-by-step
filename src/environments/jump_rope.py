@@ -4,4 +4,5 @@ from src.environments.environment import Environment
 
 
 class JumpRope(Environment):
-    pass
+    low_point = 0.5
+    high_point = 0.8
