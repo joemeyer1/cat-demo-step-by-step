@@ -1,14 +1,16 @@
 
+import random
+from typing import Tuple
 
 from src.environments.environment import Environment
-from src.utils.ask_chatgpt import is_appropriate
+from src.utils import ask_chatgpt
 
 
 class Cat:
-    restrict_behavior_to_range = (0, 1)
+    restrict_behavior_to_range: Tuple = (0, 1)
 
-    def generate_random_restricted_behavior(self, environment) -> float:
-        pass
+    def generate_random_restricted_behavior(self, environment: Environment) -> float:
+        return random.uniform(*self.restrict_behavior_to_range)
 
     def behave(self, environment: Environment) -> float:
         return self.generate_random_restricted_behavior(environment)
@@ -18,7 +20,7 @@ class Cat:
 
     def test(self, environment: Environment):
         behavior = self.behave(environment)
-        if is_appropriate(behavior, environment):
+        if ask_chatgpt.is_appropriate(behavior, environment):
             print("Yay, happy cats get rats :)")
         else:
             print("Nooo, find another home kitty :(")
