@@ -1,19 +1,20 @@
 
 import random
-from typing import List
 
 from src.environments.environment import Environment
 from src.utils import ask_chatgpt
 
 
 class Cat:
-    restrict_behavior_to_range: List
+    lower_bound_behavior_range: float
+    upper_bound_behavior_range: float
 
     def __init__(self):
-        self.restrict_behavior_to_range = [0, 1]
+        self.lower_bound_behavior_range = 0
+        self.upper_bound_behavior_range = 1
 
     def generate_random_restricted_behavior(self, environment: Environment) -> float:
-        return random.uniform(*self.restrict_behavior_to_range) + environment.density
+        return random.uniform(self.lower_bound_behavior_range, self.upper_bound_behavior_range) + environment.density
 
     def behave(self, environment: Environment) -> float:
         return self.generate_random_restricted_behavior(environment)
@@ -23,14 +24,14 @@ class Cat:
             behavior = self.generate_random_restricted_behavior(environment)
             print(behavior)
             if environment.is_too_low(behavior=behavior):
-                self.restrict_behavior_to_range[0] += 0.05
+                self.lower_bound_behavior_range += 0.05
             elif environment.is_too_high(behavior=behavior):
-                self.restrict_behavior_to_range[1] -= 0.05
+                self.upper_bound_behavior_range -= 0.05
 
     def test(self, environment: Environment):
         behavior = self.behave(environment)
         print(f"test: {behavior} {environment}")
-        print(f"{self.restrict_behavior_to_range}")
+        print(f"Behavior Range({self.lower_bound_behavior_range}, {self.upper_bound_behavior_range})")
         if ask_chatgpt.is_appropriate(behavior, environment):
             print("Yay, happy cats get rats :)")
         else:
