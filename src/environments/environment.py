@@ -1,6 +1,4 @@
 
-from typing import Tuple
-
 
 class Environment:
     low_point: float
