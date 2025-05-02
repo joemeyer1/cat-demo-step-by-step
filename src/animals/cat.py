@@ -18,9 +18,9 @@ class Cat:
     def train(self, environment: Environment, n_epochs: int = 100):
         for i in range(n_epochs):
             behavior = self.generate_random_restricted_behavior(environment)
-            if ask_chagpt.is_behavior_too_low(behavior=behavior, environment=environment):
+            if environment.is_too_low(behavior=behavior):
                 self.restrict_behavior_to_range[0] += 0.1
-            elif ask_chagpt.is_behavior_too_high(behavior=behavior, environment=environment):
+            elif environment.is_too_high(behavior=behavior):
                 self.restrict_behavior_to_range[1] -= 0.1
 
     def test(self, environment: Environment):
