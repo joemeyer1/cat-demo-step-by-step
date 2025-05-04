@@ -21,7 +21,7 @@ class Cat:
 
     def train(self, environment: Environment, n_epochs: int = 100):
         for i in range(n_epochs):
-            behavior = self.generate_random_restricted_behavior(environment)
+            behavior = self.behave(environment)
             print(behavior)
             if environment.is_too_low(behavior=behavior):
                 self.lower_bound_behavior_range += 0.05
