@@ -31,7 +31,8 @@ class Cat:
     def test(self, environment: Environment):
         behavior = self.behave(environment)
         print(f"test: {behavior} {environment}")
-        print(f"Behavior Range({self.lower_bound_behavior_range}, {self.upper_bound_behavior_range})")
+        print(f"Behavior Range({self.lower_bound_behavior_range + environment.density}, {self.upper_bound_behavior_range + environment.density})")
+        print(f"Environment Range({environment.low_point}, {environment.high_point})")
         if ask_chatgpt.is_appropriate(behavior, environment):
             print("Yay, happy cats get rats :)")
         else:
