@@ -25,8 +25,10 @@ class Cat:
             print(behavior)
             if environment.is_too_low(behavior=behavior):
                 self.lower_bound_behavior_range += 0.05
+                self.lower_bound_behavior_range = min(self.lower_bound_behavior_range, self.upper_bound_behavior_range)
             elif environment.is_too_high(behavior=behavior):
                 self.upper_bound_behavior_range -= 0.05
+                self.upper_bound_behavior_range = max(self.lower_bound_behavior_range, self.upper_bound_behavior_range)
 
     def test(self, environment: Environment):
         behavior = self.behave(environment)
