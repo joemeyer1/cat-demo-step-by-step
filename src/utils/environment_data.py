@@ -19,4 +19,6 @@ class EnvironmentData:
         self.train_environment, self.test_environment = self.split_data(environment=environment, train_test_proportion=train_test_proportion)
 
     def split_data(self, environment: Environment, train_test_proportion: float) -> Tuple[Environment, Environment]:
+        """For now uses all data for training and testing."""
+
         return environment, environment

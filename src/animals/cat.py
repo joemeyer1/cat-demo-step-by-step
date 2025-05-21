@@ -16,12 +16,9 @@ class Cat:
     def generate_random_restricted_behavior(self, environment: Environment) -> float:
         return random.uniform(self.lower_bound_behavior_range, self.upper_bound_behavior_range) + environment.density
 
-    def behave(self, environment: Environment) -> float:
-        return self.generate_random_restricted_behavior(environment)
-
     def train(self, environment: Environment, n_epochs: int = 100):
         for i in range(n_epochs):
-            behavior = self.behave(environment)
+            behavior = self.generate_random_restricted_behavior(environment)
             print(behavior)
             if environment.is_too_low(behavior=behavior):
                 self.lower_bound_behavior_range += 0.05
@@ -31,7 +28,7 @@ class Cat:
                 self.upper_bound_behavior_range = max(self.lower_bound_behavior_range, self.upper_bound_behavior_range)
 
     def test(self, environment: Environment):
-        behavior = self.behave(environment)
+        behavior = self.generate_random_restricted_behavior(environment)
         print(f"test: {behavior} {environment}")
         print(f"Behavior Range({self.lower_bound_behavior_range + environment.density}, {self.upper_bound_behavior_range + environment.density})")
         print(f"Environment Range({environment.low_point}, {environment.high_point})")
